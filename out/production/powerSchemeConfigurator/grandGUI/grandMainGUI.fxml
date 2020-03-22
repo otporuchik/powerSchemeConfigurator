@@ -58,7 +58,7 @@
                <Button fx:id="getSpecsButton" layoutX="378.0" layoutY="160.0" mnemonicParsing="false" onAction="#getSpecs" prefHeight="25.0" prefWidth="141.0" text="Get specs" />
                 </children>
             </Pane>
-            <Canvas fx:id="canvas" height="400.0" layoutX="10.0" layoutY="7.0" width="1184.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Canvas fx:id="canvas" width="1184.0" height="400.0" layoutX="10.0" layoutY="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
         </children>
     </AnchorPane>
 </VBox>

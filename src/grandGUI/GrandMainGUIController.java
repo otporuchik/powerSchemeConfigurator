@@ -57,6 +57,10 @@ public class GrandMainGUIController {
     public double counterY;
     public double counterXtext;
     public double counterYtext;
+    /**
+     * Storing counter for QF (circuit breakers).
+     */
+    public int i = 1;
 
 
     @FXML
@@ -113,8 +117,6 @@ public class GrandMainGUIController {
      * Initializing variables counterX, counterY.
      */
     public void initialize() {
-        /*context().setFill(Color.GREEN);
-        context().fillRect(0,0,1184,400);*/
         context().setLineWidth(2);
         context().strokeRect(1,1,1182, 398); //outer frame
         context().strokeRect(22,12,1148,376); //inner frame
@@ -140,13 +142,13 @@ public class GrandMainGUIController {
         context().setFont(Font.font("Arial", FontWeight.EXTRA_LIGHT, 20));
         context().setFill(Color.BLACK);
         context().fillText("Main",27,293); //main name
+        context().fillText("QF" + i, 90,55); //QFxx counter.
 
         counterX = 186; //22 + 164
         counterY = 268;
 
         counterXtext = 191; //27 + 164
         counterYtext = 293; //268 + 25
-
     }
 
     /**Setting type of object = pump.*/
@@ -228,7 +230,6 @@ public class GrandMainGUIController {
         // node connecting all lines
         context().fillOval(counterX + 79, 252, 6, 6);
 
-
         context().strokeRect(counterX,counterY,164,30); // next name field
         context().strokeRect(counterX,counterY + 30,164,30); // next current field
         context().strokeRect(counterX,counterY + 60,164,30); // next power field
@@ -243,7 +244,6 @@ public class GrandMainGUIController {
         counterXtext += 164; //also field width
 
         grandSplitMenuButton.setText("select type");
-
         nameTextField.setText("");
         powerTextField.setText("");
         operatingCurrentTextField.setText("");
