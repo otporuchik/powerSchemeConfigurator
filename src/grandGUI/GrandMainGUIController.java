@@ -13,11 +13,15 @@ import electricalEquipmentFactory.ElectricalEquipmentTypes;
 import grandConfigurator.GrandCollection;
 import grandConfigurator.GrandConfigurator;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -132,6 +136,11 @@ public class GrandMainGUIController {
         context().setLineDashes(15,10);
         context().strokeLine(42,142,1158,142); //bottom line (protecting earth)
         context().setLineDashes(0);
+
+        /**
+         * test line suppose to be 100mm length
+         */
+        context().strokeLine(42,155,420,155);
 
         context().setLineWidth(2);
         context().strokeRect(22,268,164,30); // main name field

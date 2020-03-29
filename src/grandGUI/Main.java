@@ -21,6 +21,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("grandMainGUI.fxml"));
+
+        /*
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("client.fxml") );
+        loader.setController( this );
+        Parent root = loader.load();
+         */
+
         primaryStage.setTitle("Grand Canal");
         primaryStage.setScene(new Scene(root, 1184, 620));
         primaryStage.show();
