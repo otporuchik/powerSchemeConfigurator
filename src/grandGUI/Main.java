@@ -4,11 +4,21 @@
 
 package grandGUI;
 
+import constants.Graphics;
+import electroPackage.ElectricalEquipment;
+import electroPackage.ElectricalEquipmentCollection;
+import electroPackage.ElectricalEquipmentTypes;
+import graphics.SchemePage;
+import graphics.Stamps;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import static constants.Graphics.HEIGHT_A4;
+import static constants.Graphics.WIDTH_A4;
 
 /**
  * Configuring one lined power scheme and suggests circuit breakers
@@ -20,20 +30,37 @@ public class Main extends Application {
     //creating GUI
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("grandMainGUI.fxml"));
 
-        /*
-        FXMLLoader loader = new FXMLLoader( getClass().getResource("client.fxml") );
-        loader.setController( this );
-        Parent root = loader.load();
-         */
+        /*FXMLLoader loader = new FXMLLoader( getClass().getResource("grandMainGUI.fxml") );
+        Parent root = loader.load();*/
+
+        SchemePage.setWidth(WIDTH_A4);
+        SchemePage.setHeight(HEIGHT_A4 / 2);
+
+        Stamps.setWidth(WIDTH_A4);
+        Stamps.setHeight(HEIGHT_A4 / 2);
+        Stamps.setMainStamp();
+
+        Parent root = SchemePage.getSchemePage().getRootPane();
+
+        Scene newScene = new Scene(root);
 
         primaryStage.setTitle("Grand Canal");
-        primaryStage.setScene(new Scene(root, 1184, 620));
+        primaryStage.setScene(newScene);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
+
+        ElectricalEquipment trr = new ElectricalEquipment(1800, ElectricalEquipmentTypes.PUMP, "trr", 220);
+        ElectricalEquipmentCollection.getElectricalEquipmentCollection().addToCollection(trr);
+        ElectricalEquipment hrr = new ElectricalEquipment(1800, ElectricalEquipmentTypes.LIGHT, "hrr", 220);
+        ElectricalEquipmentCollection.getElectricalEquipmentCollection().addToCollection(hrr);
+
+        for (ElectricalEquipment x: ElectricalEquipmentCollection.getElectricalEquipmentCollection().getCollection()) {
+            System.out.println("Hello, my name is: " + x.getName() + x.getOperatingCurrent());
+        }
+
     }
 }
