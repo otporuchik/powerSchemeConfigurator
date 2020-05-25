@@ -25,10 +25,12 @@ public class Stamps {
      */
     private static double height = Graphics.HEIGHT_A3;
 
+    /** setting width if it differs from A3 */
     public static void setWidth(double width) {
         Stamps.width = width;
     }
 
+    /** Setting height if it differs from A3 */
     public static void setHeight(double height) {
         Stamps.height = height;
     }
@@ -90,10 +92,10 @@ public class Stamps {
     }
 
     /**
-     * Setting stamp on the page.
+     * Getting main stamp on the page.
      * Add this as a Node to rootPane.
      */
-    public static void setMainStamp() {
+    public static void getMainStamp() {
         //mainStamp as canvas
         Canvas mainStamp = new Canvas();
         mainStamp.setWidth(mmToPixels(185));
@@ -183,6 +185,52 @@ public class Stamps {
         gc.fillText(divideRows(companyName, 30), mmToPixels(160), mmToPixels(getRowHigh(companyName, 30, 49)));
 
         SchemePage.getSchemePage().addToRootPane(mainStamp);
+    }
+
+    /**
+     * Getting left side stamp
+     */
+    public static void getLeftStamp() {
+        //additional bottom left side stamp
+        //leftBottomStamp as canvas
+        Canvas leftBottomStamp = new Canvas();
+        leftBottomStamp.setWidth(mmToPixels(287));
+        leftBottomStamp.setHeight(mmToPixels(12));
+
+        //getting graphic context
+        GraphicsContext gcLeftBottomStamp = leftBottomStamp.getGraphicsContext2D();
+
+        //drawing stamps outer frame
+        gcLeftBottomStamp.setStroke(Color.BLACK);
+        gcLeftBottomStamp.setLineWidth(mmToPixels(1));
+        gcLeftBottomStamp.strokeRect(0,0,mmToPixels(145),mmToPixels(12));
+        gcLeftBottomStamp.strokeRect(mmToPixels(167),0,mmToPixels(120),mmToPixels(12));
+        //drawing horizontal table row
+        gcLeftBottomStamp.setLineWidth(mmToPixels(0.18));
+        gcLeftBottomStamp.strokeLine(0, mmToPixels(5), mmToPixels(145), mmToPixels(5));
+        //drawing vertical lines
+        gcLeftBottomStamp.strokeLine(mmToPixels(25), 0, mmToPixels(25), mmToPixels(12));
+        gcLeftBottomStamp.strokeLine(mmToPixels(60), 0, mmToPixels(60), mmToPixels(12));
+        gcLeftBottomStamp.strokeLine(mmToPixels(85), 0, mmToPixels(85), mmToPixels(12));
+        gcLeftBottomStamp.strokeLine(mmToPixels(110), 0, mmToPixels(110), mmToPixels(12));
+        gcLeftBottomStamp.strokeLine(mmToPixels(227), 0, mmToPixels(227), mmToPixels(12));
+
+        //set canvas position
+        leftBottomStamp.setTranslateX(-mmToPixels(129.3)); //(287/2)-(12/2)-8-0.2
+        leftBottomStamp.setTranslateY(height - mmToPixels(154.5));
+
+        //filling left side stamp
+        gcLeftBottomStamp.setFont(Font.font("ARIAL", mmToPixels(2.8)));
+        gcLeftBottomStamp.fillText("Инв.№ подл.", mmToPixels(1),mmToPixels(4));
+        gcLeftBottomStamp.fillText("Подпись и дата", mmToPixels(26),mmToPixels(4));
+        gcLeftBottomStamp.fillText("Взам. инв. №", mmToPixels(61),mmToPixels(4));
+        gcLeftBottomStamp.fillText("Инв. № дубл.", mmToPixels(86),mmToPixels(4));
+        gcLeftBottomStamp.fillText("Подпись и дата", mmToPixels(111),mmToPixels(4));
+
+        //rotate left stamp
+        leftBottomStamp.setRotate(-90);
+
+        SchemePage.getSchemePage().addToRootPane(leftBottomStamp);
     }
 
 

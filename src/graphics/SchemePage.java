@@ -3,6 +3,7 @@ package graphics;
 import constants.Graphics;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -72,7 +73,7 @@ public class SchemePage {
     }
 
     /** Adding nodes to this rootPane to show them on it */
-    public void addToRootPane(Node shape) {
+    public void addToRootPane(Node ... shape) { //variable number of arguments
         rootPane.getChildren().addAll(shape);
     }
 }

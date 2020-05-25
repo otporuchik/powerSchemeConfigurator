@@ -4,17 +4,17 @@
 
 package grandGUI;
 
-import constants.Graphics;
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import electroPackage.ElectricalEquipment;
 import electroPackage.ElectricalEquipmentCollection;
 import electroPackage.ElectricalEquipmentTypes;
 import graphics.SchemePage;
 import graphics.Stamps;
+import graphics.WorkField;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
 import static constants.Graphics.HEIGHT_A4;
@@ -35,15 +35,19 @@ public class Main extends Application {
         Parent root = loader.load();*/
 
         SchemePage.setWidth(WIDTH_A4);
-        SchemePage.setHeight(HEIGHT_A4 / 2);
-
+        SchemePage.setHeight(HEIGHT_A4);
         Stamps.setWidth(WIDTH_A4);
-        Stamps.setHeight(HEIGHT_A4 / 2);
-        Stamps.setMainStamp();
+        Stamps.setHeight(HEIGHT_A4);
+        Stamps.getMainStamp();
+        Stamps.getLeftStamp();
+
+        WorkField.setWidth(WIDTH_A4);
+        WorkField.getWorkField();
 
         Parent root = SchemePage.getSchemePage().getRootPane();
 
-        Scene newScene = new Scene(root);
+        ScrollPane scrollPane = new ScrollPane(root);
+        Scene newScene = new Scene(scrollPane);
 
         primaryStage.setTitle("Grand Canal");
         primaryStage.setScene(newScene);
