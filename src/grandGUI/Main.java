@@ -46,6 +46,8 @@ public class Main extends Application {
         WorkField.getWorkField();
 
         CircuitBreaker.getCircuitBreaker();
+        CircuitBreaker.getCircuitBreaker();
+        CircuitBreaker.getCircuitBreaker();
 
         Parent root = SchemePage.getSchemePage().getRootPane();
 
