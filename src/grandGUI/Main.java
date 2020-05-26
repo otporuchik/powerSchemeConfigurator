@@ -8,6 +8,7 @@ import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import electroPackage.ElectricalEquipment;
 import electroPackage.ElectricalEquipmentCollection;
 import electroPackage.ElectricalEquipmentTypes;
+import graphics.CircuitBreaker;
 import graphics.SchemePage;
 import graphics.Stamps;
 import graphics.WorkField;
@@ -43,6 +44,8 @@ public class Main extends Application {
 
         WorkField.setWidth(WIDTH_A4);
         WorkField.getWorkField();
+
+        CircuitBreaker.getCircuitBreaker();
 
         Parent root = SchemePage.getSchemePage().getRootPane();
 

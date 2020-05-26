@@ -208,6 +208,7 @@ public class Stamps {
         //drawing horizontal table row
         gcLeftBottomStamp.setLineWidth(mmToPixels(0.18));
         gcLeftBottomStamp.strokeLine(0, mmToPixels(5), mmToPixels(145), mmToPixels(5));
+        gcLeftBottomStamp.strokeLine(mmToPixels(167), mmToPixels(5), mmToPixels(287), mmToPixels(5));
         //drawing vertical lines
         gcLeftBottomStamp.strokeLine(mmToPixels(25), 0, mmToPixels(25), mmToPixels(12));
         gcLeftBottomStamp.strokeLine(mmToPixels(60), 0, mmToPixels(60), mmToPixels(12));
