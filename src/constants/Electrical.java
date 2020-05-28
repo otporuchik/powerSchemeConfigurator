@@ -10,7 +10,7 @@ package constants;
 import electroPackage.ElectricalEquipmentTypes;
 
 /**
- * Storing miscellaneous electrical constants for farther usage in program
+ * Storing miscellaneous electrical constants for further usage in program
  * and methods to use them appropriately.
  *
  * @version             1.0 02 Feb 2020

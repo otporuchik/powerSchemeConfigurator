@@ -7,7 +7,7 @@ import constants.Electrical;
  * Able to count working power or current if needed.
  */
 public class ElectricalEquipment {
-    ElectricalEquipmentTypes type; //type of electrical equipment
+    private ElectricalEquipmentTypes type; //type of electrical equipment
     private String name; //name of electrical equipment
     private String circuitBreaker; //It could be motor-protectors, not only circuit breakers
     private String cable; //cable to supply electrical equipment

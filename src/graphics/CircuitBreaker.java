@@ -14,7 +14,7 @@ public class CircuitBreaker {
     /** Value to move next breaker to the right after each call creating breaker method. */
     private static int moveCounter = 0;
 
-    public static void getCircuitBreaker() {
+    public static void getCircuitBreaker(double power, double current, String name) {
 //1 phase circuit breaker module
         //here it starts
         Circle circleL = new Circle();
@@ -57,24 +57,30 @@ public class CircuitBreaker {
                 cbmLine4, cbmLine5, cbmLine6, cbmMove5, cbmLine7, cbmLine8);
 
         //line 1 to connect Pe line to circuit breaker
-        Line cbmLinePe1 = new Line(mmToPixels(70 + moveCounter), mmToPixels(78), mmToPixels(76 + moveCounter), mmToPixels(73));
+        Line cbmLinePe1 = new Line(mmToPixels(70 + moveCounter), mmToPixels(78),
+                mmToPixels(76 + moveCounter), mmToPixels(73));
         cbmLinePe1.setStroke(Color.BLACK);
         cbmLinePe1.setStrokeWidth(mmToPixels(0.4));
-        cbmLinePe1.getStrokeDashArray().addAll(mmToPixels(3), mmToPixels(1), mmToPixels(0.5), mmToPixels(1));
+        cbmLinePe1.getStrokeDashArray().addAll(mmToPixels(3), mmToPixels(1),
+                mmToPixels(0.5), mmToPixels(1));
 
         //line 2 to connect Pe line to circuit breaker
-        Line cbmLinePe2 = new Line(mmToPixels(76 + moveCounter), mmToPixels(73), mmToPixels(76 + moveCounter), mmToPixels(59));
+        Line cbmLinePe2 = new Line(mmToPixels(76 + moveCounter), mmToPixels(73),
+                mmToPixels(76 + moveCounter), mmToPixels(59));
         cbmLinePe2.setStroke(Color.BLACK);
         cbmLinePe2.setStrokeWidth(mmToPixels(0.4));
-        cbmLinePe2.getStrokeDashArray().addAll(mmToPixels(3), mmToPixels(1), mmToPixels(0.5), mmToPixels(1));
+        cbmLinePe2.getStrokeDashArray().addAll(mmToPixels(3), mmToPixels(1),
+                mmToPixels(0.5), mmToPixels(1));
 
         //line to show it is one phase module
-        Line line1phase = new Line(mmToPixels(68 + moveCounter), mmToPixels(85), mmToPixels(72 + moveCounter), mmToPixels(82));
+        Line line1phase = new Line(mmToPixels(68 + moveCounter), mmToPixels(85),
+                mmToPixels(72 + moveCounter), mmToPixels(82));
         line1phase.setStroke(Color.BLACK);
         line1phase.setStrokeWidth(mmToPixels(0.18));
 
         //Electrical equipment circuit breaker border line in data table
-        Line rightBorderLine = new Line(mmToPixels(80 + moveCounter), mmToPixels(118), mmToPixels(80 + moveCounter), mmToPixels(165));
+        Line rightBorderLine = new Line(mmToPixels(80 + moveCounter), mmToPixels(118),
+                mmToPixels(80 + moveCounter), mmToPixels(165));
         rightBorderLine.setStroke(Color.BLACK);
         rightBorderLine.setStrokeWidth(mmToPixels(0.5));
 
@@ -87,7 +93,7 @@ public class CircuitBreaker {
         phaseValue.setX(mmToPixels(61 + moveCounter));
         phaseValue.setY(mmToPixels(122.5 + 7));
 
-        Text powerValue = new Text("POWER");
+        Text powerValue = new Text(String.valueOf(power));
         powerValue.setFont(Font.font("ARIAL", FontWeight.NORMAL, FontPosture.REGULAR, mmToPixels(3)));
         powerValue.setFill(Color.BLACK);
         powerValue.setWrappingWidth(mmToPixels(18));
@@ -95,7 +101,7 @@ public class CircuitBreaker {
         powerValue.setX(mmToPixels(61 + moveCounter));
         powerValue.setY(mmToPixels(122.5 + 7 + 7));
 
-        Text currentValue = new Text("current42");
+        Text currentValue = new Text(String.valueOf(current));
         currentValue.setFont(Font.font("ARIAL", FontWeight.NORMAL, FontPosture.REGULAR, mmToPixels(3)));
         currentValue.setFill(Color.BLACK);
         currentValue.setWrappingWidth(mmToPixels(18));
@@ -103,7 +109,7 @@ public class CircuitBreaker {
         currentValue.setX(mmToPixels(61 + moveCounter));
         currentValue.setY(mmToPixels(122.5 + 7 + 7 + 7));
 
-        Text nameValue = new Text("name\nsurname\n1543924\nhuhhuhh");
+        Text nameValue = new Text(name);
         nameValue.setFont(Font.font("ARIAL", FontWeight.NORMAL, FontPosture.REGULAR, mmToPixels(3)));
         nameValue.setFill(Color.BLACK);
         nameValue.setWrappingWidth(mmToPixels(18));
@@ -111,8 +117,10 @@ public class CircuitBreaker {
         nameValue.setX(mmToPixels(61 + moveCounter));
         nameValue.setY(mmToPixels(122.5 + 7 + 7 + 7 + 8.5));
 
-        SchemePage.getSchemePage().addToRootPane(circleL, circleN, circlePe, oneLineModule, cbmLinePe1, cbmLinePe2, rightBorderLine, line1phase, phaseValue, powerValue, currentValue, nameValue);
+        SchemePage.getSchemePage().addToRootPane(circleL, circleN, circlePe, oneLineModule, cbmLinePe1, cbmLinePe2,
+                rightBorderLine, line1phase, phaseValue, powerValue, currentValue, nameValue);
 
+        //move next circuit breaker to the right
         moveCounter += 20;
     }
 }

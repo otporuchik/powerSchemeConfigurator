@@ -5,6 +5,7 @@
 package grandGUI;
 
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
+import electroPackage.CircuitBreakerStore;
 import electroPackage.ElectricalEquipment;
 import electroPackage.ElectricalEquipmentCollection;
 import electroPackage.ElectricalEquipmentTypes;
@@ -45,9 +46,9 @@ public class Main extends Application {
         WorkField.setWidth(WIDTH_A4);
         WorkField.getWorkField();
 
-        CircuitBreaker.getCircuitBreaker();
-        CircuitBreaker.getCircuitBreaker();
-        CircuitBreaker.getCircuitBreaker();
+        CircuitBreaker.getCircuitBreaker(14, 15.2, "N01.01");
+        CircuitBreaker.getCircuitBreaker(201, 109, "P10.10/11");
+        CircuitBreaker.getCircuitBreaker(15, 15, "ngjht\n15554");
 
         Parent root = SchemePage.getSchemePage().getRootPane();
 
@@ -62,13 +63,22 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-        ElectricalEquipment trr = new ElectricalEquipment(1800, ElectricalEquipmentTypes.PUMP, "trr", 220);
+        //trying creating different types of objects
+        ElectricalEquipment trr = new ElectricalEquipment(2000, ElectricalEquipmentTypes.PUMP,
+                "trr", 380);
+        trr.setCircuitBreaker(CircuitBreakerStore.getCircuitBreaker(trr.getType(), trr.getOperatingCurrent()));
         ElectricalEquipmentCollection.getElectricalEquipmentCollection().addToCollection(trr);
-        ElectricalEquipment hrr = new ElectricalEquipment(1800, ElectricalEquipmentTypes.LIGHT, "hrr", 220);
+
+        ElectricalEquipment hrr = new ElectricalEquipment(2000, ElectricalEquipmentTypes.LIGHT,
+                "hrr", 220);
+        hrr.setCircuitBreaker(CircuitBreakerStore.getCircuitBreaker(hrr.getType(), hrr.getOperatingCurrent()));
         ElectricalEquipmentCollection.getElectricalEquipmentCollection().addToCollection(hrr);
 
-        for (ElectricalEquipment x: ElectricalEquipmentCollection.getElectricalEquipmentCollection().getCollection()) {
-            System.out.println("Hello, my name is: " + x.getName() + x.getOperatingCurrent());
+        for (ElectricalEquipment x:
+                ElectricalEquipmentCollection.getElectricalEquipmentCollection().getCollection()) {
+            System.out.println("Hello, my name is: " + x.getName() +
+                    "\nand I'm protected by: " + x.getCircuitBreaker() +
+                    "\nbecause my operating current is: " + x.getOperatingCurrent() + "\n");
         }
 
     }
