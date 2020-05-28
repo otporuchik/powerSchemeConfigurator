@@ -3,7 +3,6 @@ package graphics;
 import constants.Graphics;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;

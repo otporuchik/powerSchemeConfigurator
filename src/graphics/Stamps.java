@@ -71,7 +71,7 @@ public class Stamps {
      * Setting row high depending on number of rows and initial high
      * when String has only one row.
      */
-    public static double getRowHigh(String text, int maxLength, double initHeight) {
+    public static double getRowHeight(String text, int maxLength, double initHeight) {
         double height = initHeight;//высота расположения начальной строки.
         int rowNumber = 1;//количество строк.
         char[] textArray = text.toCharArray();
@@ -171,18 +171,18 @@ public class Stamps {
 
         //Project name
         String projectName = "здесь указывается наименование проекта, например, очень длинное и сложное наименование из целых трёх строк! или даже гораздо больше, например - целых пять строк. Представляете? Пять! Пяяяяяять строк!!!!";
-        gc.fillText(divideRows(projectName, 45), mmToPixels(100), mmToPixels(getRowHigh(projectName, 45, 29)));
+        gc.fillText(divideRows(projectName, 45), mmToPixels(100), mmToPixels(getRowHeight(projectName, 45, 29)));
 
         gc.fillText("Лист", mmToPixels(145), mmToPixels(39), mmToPixels(19.5) );
         gc.fillText("Листов", mmToPixels(170), mmToPixels(39), mmToPixels(29.5) );
 
         //Document name
         String documentName = "Название схемы. Например - схема однолинейная простенькая но хорошая. всего в три строки! ТРИИИИИ строки всего...";
-        gc.fillText(divideRows(documentName, 45), mmToPixels(100), mmToPixels(getRowHigh(documentName, 45, 49)));
+        gc.fillText(divideRows(documentName, 45), mmToPixels(100), mmToPixels(getRowHeight(documentName, 45, 49)));
 
         //Company name
         String companyName = "Название фирмы. Коротенько";
-        gc.fillText(divideRows(companyName, 30), mmToPixels(160), mmToPixels(getRowHigh(companyName, 30, 49)));
+        gc.fillText(divideRows(companyName, 30), mmToPixels(160), mmToPixels(getRowHeight(companyName, 30, 49)));
 
         SchemePage.getSchemePage().addToRootPane(mainStamp);
     }
