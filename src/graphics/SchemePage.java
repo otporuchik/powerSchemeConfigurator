@@ -25,7 +25,7 @@ public class SchemePage {
     /** The only object of this class */
     private static SchemePage schemePage;
     /** Pane where all scheme going to live */
-    private Pane rootPane;
+    private static Pane rootPane;
     /** Width for this Pane */
     private static double width = Graphics.WIDTH_A3;
     /** Height for this Pane */
@@ -35,13 +35,14 @@ public class SchemePage {
      *  setting it's parameters.
      */
     private SchemePage() {
-        this.rootPane = new Pane();
+        rootPane = new Pane();
         rootPane.setPrefWidth(width);
         rootPane.setPrefHeight(height);
         rootPane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //main frame
-        Rectangle mainFrame = new Rectangle(mmToPixels(20), mmToPixels(5), width - mmToPixels(25), height - mmToPixels(10));
+        Rectangle mainFrame = new Rectangle(mmToPixels(20), mmToPixels(5),
+                width - mmToPixels(25), height - mmToPixels(10));
         mainFrame.setFill(Color.WHITE);
         mainFrame.setStroke(Color.BLACK);
         mainFrame.setStrokeWidth(mmToPixels(0.5));
@@ -54,6 +55,7 @@ public class SchemePage {
         if(schemePage == null) {
             schemePage = new SchemePage();
         }
+        System.out.println("Take your scheme!");
         return schemePage;
     }
     /** Setting width to Pane. By default = WIDTH_A3 */
@@ -66,9 +68,9 @@ public class SchemePage {
         SchemePage.height = height;
     }
 
-    /** getting this objects Pane */
+    /** getting this SchemePage Pane */
     public Pane getRootPane() {
-        return this.rootPane;
+        return rootPane;
     }
 
     /** Adding nodes to this rootPane to show them on it */

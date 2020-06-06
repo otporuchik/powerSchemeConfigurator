@@ -14,6 +14,7 @@ import graphics.SchemePage;
 import graphics.Stamps;
 import graphics.WorkField;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -33,10 +34,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        /*FXMLLoader loader = new FXMLLoader( getClass().getResource("grandMainGUI.fxml") );
-        Parent root = loader.load();*/
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("grandMainGUI.fxml") );
+        Parent root = loader.load();
 
-        SchemePage.setWidth(WIDTH_A4);
+       /* SchemePage.setWidth(WIDTH_A4);
         SchemePage.setHeight(HEIGHT_A4);
         Stamps.setWidth(WIDTH_A4);
         Stamps.setHeight(HEIGHT_A4);
@@ -50,18 +51,19 @@ public class Main extends Application {
         CircuitBreaker.getCircuitBreaker(201, 109, "P10.10/11");
         CircuitBreaker.getCircuitBreaker(15, 15, "ngjht\n15554");
 
-        Parent root = SchemePage.getSchemePage().getRootPane();
+        Parent root = SchemePage.getSchemePage().getRootPane();*/
 
         ScrollPane scrollPane = new ScrollPane(root);
         Scene newScene = new Scene(scrollPane);
 
-        primaryStage.setTitle("Grand Canal");
+        primaryStage.setTitle("Hello world! Meow!");
         primaryStage.setScene(newScene);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
+/*
 
         //trying creating different types of objects
         ElectricalEquipment trr = new ElectricalEquipment(2000, ElectricalEquipmentTypes.PUMP,
@@ -80,6 +82,7 @@ public class Main extends Application {
                     "\nand I'm protected by: " + x.getCircuitBreaker() +
                     "\nbecause my operating current is: " + x.getOperatingCurrent() + "\n");
         }
+*/
 
     }
 }

@@ -1,7 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox prefHeight="620.0" prefWidth="1184.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grandGUI.GrandMainGUIController">
-
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grandGUI.GrandMainGUIController">
+   <children>
+      <HBox alignment="CENTER" layoutX="33.0" layoutY="16.0" prefHeight="381.0" prefWidth="737.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="381.0" prefWidth="277.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Тип электроприбора: ">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <SplitMenuButton fx:id="mainSplitMenuButton" contentDisplay="CENTER" mnemonicParsing="false" text="Выбрать тип">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#pumpMenuItem" text="насос" />
+                            <MenuItem mnemonicParsing="false" onAction="#ventMenuItem" text="вентилятор" />
+                              <MenuItem mnemonicParsing="false" onAction="#heaterMenuItem" text="нагреватель" />
+                              <MenuItem mnemonicParsing="false" onAction="#lightMenuItem" text="освещение" />
+                          </items>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </SplitMenuButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Наименование">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="nameTextField" alignment="CENTER">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" text="мощность, Вт">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="powerTextField" alignment="CENTER">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" text="ток, А">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="currentTextField" alignment="CENTER">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="322.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="напряжение" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="220В" />
+                                    <RadioButton fx:id="radioButton220V" mnemonicParsing="false" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="380В" />
+                                    <RadioButton fx:id="radioButton380V" mnemonicParsing="false" selected="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <TextArea fx:id="mainTextArea" prefHeight="595.0" prefWidth="416.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="33.0" layoutY="397.0" prefHeight="99.0" prefWidth="737.0">
+         <children>
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#createElectricalObject" text="Создать объект">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#getScheme" text="Получить схему">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
