@@ -16,7 +16,7 @@ public class CircuitBreakerStore {
         thisLoop: for(int i = 0; i < STANDARD_CIRCUIT_BREAKERS_ARRAY.length; i++) {
             //COEFFICIENT_OF_DEVIATION here is to choose circuit breaker not too close to operating current
             if ((STANDARD_CIRCUIT_BREAKERS_ARRAY[i] >= operatingCurrent * COEFFICIENT_OF_DEVIATION)) {
-                circuitBreakerValue = "ABB S201C" + String.valueOf(STANDARD_CIRCUIT_BREAKERS_ARRAY[i]);
+                circuitBreakerValue = "\nC" + String.valueOf(STANDARD_CIRCUIT_BREAKERS_ARRAY[i]);
                 break thisLoop;
             }
             /*
@@ -39,7 +39,7 @@ public class CircuitBreakerStore {
         for(int i = 0; i < STANDARD_MOTOR_PROTECTORS_ARRAY.length; i++) {
             if(operatingCurrent >= STANDARD_MOTOR_PROTECTORS_ARRAY[i][0] &&
                     operatingCurrent <= STANDARD_MOTOR_PROTECTORS_ARRAY[i][1]) {
-                motorProtectorValue = "ABB MS116-" + STANDARD_MOTOR_PROTECTORS_ARRAY[i][1];
+                motorProtectorValue = "\nMS116\n" + STANDARD_MOTOR_PROTECTORS_ARRAY[i][1];
             }
         }
         return motorProtectorValue;

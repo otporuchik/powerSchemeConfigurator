@@ -14,7 +14,11 @@ public class CircuitBreaker {
     /** Value to move next breaker to the right after each call creating breaker method. */
     private static int moveCounter = 0;
 
-    public static void getCircuitBreaker(double power, double current, String name) {
+    /** Counter of circuit breakers. QF1 = main on the input */
+    private static int counterQF = 2;
+
+    public static void getCircuitBreakerScheme(double power, double current,
+                                               String name, int voltage, String circuitBreaker, String cable) {
 //1 phase circuit breaker module
         //here it starts
         Circle circleL = new Circle();
@@ -78,20 +82,53 @@ public class CircuitBreaker {
         line1phase.setStroke(Color.BLACK);
         line1phase.setStrokeWidth(mmToPixels(0.18));
 
+        //Path to show it is three phase module
+        Path line3phases = new Path();
+        line3phases.setStroke(Color.BLACK);
+        line3phases.setStrokeWidth(mmToPixels(0.18));
+        MoveTo moveToLine1 = new MoveTo(mmToPixels(68 + moveCounter), mmToPixels(85));
+        LineTo line1 = new LineTo(mmToPixels(72 + moveCounter), mmToPixels(82));
+        MoveTo moveToLine2 = new MoveTo(mmToPixels(68 + moveCounter), mmToPixels(86));
+        LineTo line2 = new LineTo(mmToPixels(72 + moveCounter), mmToPixels(83));
+        MoveTo moveToLine3 = new MoveTo(mmToPixels(68 + moveCounter), mmToPixels(87));
+        LineTo line3 = new LineTo(mmToPixels(72 + moveCounter), mmToPixels(84));
+
+        line3phases.getElements().addAll(moveToLine1, line1, moveToLine2, line2, moveToLine3, line3);
+
         //Electrical equipment circuit breaker border line in data table
         Line rightBorderLine = new Line(mmToPixels(80 + moveCounter), mmToPixels(118),
                 mmToPixels(80 + moveCounter), mmToPixels(165));
         rightBorderLine.setStroke(Color.BLACK);
         rightBorderLine.setStrokeWidth(mmToPixels(0.5));
 
+        //Writing circuit breaker name on the scheme
+        Text circuitBreakerOnScheme = new Text("QF" + counterQF + circuitBreaker);
+        circuitBreakerOnScheme.setFont(Font.font("ARIAL", FontWeight.NORMAL, FontPosture.REGULAR,
+                mmToPixels(3)));
+        circuitBreakerOnScheme.setFill(Color.BLACK);
+        circuitBreakerOnScheme.setWrappingWidth(mmToPixels(18));
+        circuitBreakerOnScheme.setTextAlignment(TextAlignment.CENTER);
+        circuitBreakerOnScheme.setX(mmToPixels(53 + moveCounter));
+        circuitBreakerOnScheme.setY(mmToPixels(70));
+
+        //writing cable on the scheme
+        Text cableOnScheme = new Text(cable);
+        cableOnScheme.setFont(Font.font("ARIAL", FontWeight.NORMAL, FontPosture.REGULAR,
+                mmToPixels(3)));
+        cableOnScheme.setFill(Color.BLACK);
+        cableOnScheme.setX(mmToPixels(55 + moveCounter));
+        cableOnScheme.setY(mmToPixels(105));
+        cableOnScheme.setRotate(270);
+
         //Filling table data
-        Text phaseValue = new Text("phase");
+
+        /*Text phaseValue = new Text("phase");
         phaseValue.setFont(Font.font("ARIAL", FontWeight.NORMAL, FontPosture.REGULAR, mmToPixels(3)));
         phaseValue.setFill(Color.BLACK);
         phaseValue.setWrappingWidth(mmToPixels(18));
         phaseValue.setTextAlignment(TextAlignment.CENTER);
         phaseValue.setX(mmToPixels(61 + moveCounter));
-        phaseValue.setY(mmToPixels(122.5 + 7));
+        phaseValue.setY(mmToPixels(122.5 + 7));*/
 
         Text powerValue = new Text(String.valueOf(power));
         powerValue.setFont(Font.font("ARIAL", FontWeight.NORMAL, FontPosture.REGULAR, mmToPixels(3)));
@@ -117,10 +154,19 @@ public class CircuitBreaker {
         nameValue.setX(mmToPixels(61 + moveCounter));
         nameValue.setY(mmToPixels(122.5 + 7 + 7 + 7 + 8.5));
 
-        SchemePage.getSchemePage().addToRootPane(circleL, circleN, circlePe, oneLineModule, cbmLinePe1, cbmLinePe2,
-                rightBorderLine, line1phase, phaseValue, powerValue, currentValue, nameValue);
-
+        //setting one line or three lines showing phase number depending on voltage
+        if(voltage == 380) {
+            SchemePage.getSchemePage().addToRootPane(circleL, circleN, circlePe, oneLineModule,
+                    cbmLinePe1, cbmLinePe2, rightBorderLine, line3phases, circuitBreakerOnScheme,
+                    cableOnScheme, powerValue, currentValue, nameValue);
+        } else {
+            SchemePage.getSchemePage().addToRootPane(circleL, circleN, circlePe, oneLineModule,
+                    cbmLinePe1, cbmLinePe2, rightBorderLine, line1phase, circuitBreakerOnScheme,
+                    cableOnScheme, powerValue, currentValue, nameValue);
+        }
         //move next circuit breaker to the right
         moveCounter += 20;
+
+        counterQF++;
     }
 }

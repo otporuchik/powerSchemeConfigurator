@@ -4,24 +4,12 @@
 
 package grandGUI;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
-import electroPackage.CircuitBreakerStore;
-import electroPackage.ElectricalEquipment;
-import electroPackage.ElectricalEquipmentCollection;
-import electroPackage.ElectricalEquipmentTypes;
-import graphics.CircuitBreaker;
-import graphics.SchemePage;
-import graphics.Stamps;
-import graphics.WorkField;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-
-import static constants.Graphics.HEIGHT_A4;
-import static constants.Graphics.WIDTH_A4;
 
 /**
  * Configuring one lined power scheme and suggests circuit breakers

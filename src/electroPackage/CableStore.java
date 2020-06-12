@@ -6,7 +6,7 @@ package electroPackage;
 public class CableStore {
     public static String getCable(ElectricalEquipmentTypes type, double operatingCurrent) {
         String cable;
-        cable = "Cable name";
+        cable = "КГВВнг(А)-LS 3х16";
         return cable;
     }
 }

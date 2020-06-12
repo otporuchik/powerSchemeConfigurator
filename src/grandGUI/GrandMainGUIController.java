@@ -1,23 +1,25 @@
 
 package grandGUI;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import electroPackage.ElectricalEquipment;
 import electroPackage.ElectricalEquipmentCollection;
 import electroPackage.ElectricalEquipmentTypes;
+import graphics.CircuitBreaker;
 import graphics.SchemePage;
 import graphics.Stamps;
 import graphics.WorkField;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-
-import static constants.Graphics.WIDTH_A4;
 
 /**Controller of main configuration page.
  *
@@ -54,6 +56,9 @@ public class GrandMainGUIController {
 
     /** Showing text preview of created electrical equipment collection */
     @FXML TextArea mainTextArea;
+
+    /** Button to get scheme. */
+    @FXML Button getSchemeButton;
 
 
     public void initialize() {
@@ -133,18 +138,40 @@ public class GrandMainGUIController {
     }
 
     /** Getting power scheme as png image */
-    public void getScheme() {
-        System.out.println("Scheme wanted!");
+    public void getScheme(ActionEvent event) {
         //Setting page stamps and work field with default sizes (A3)
         Stamps.getMainStamp();
         Stamps.getLeftStamp();
         WorkField.getWorkField();
 
+        //Getting circuitBreakers on scheme
+        for (ElectricalEquipment eachElectricalEquipment :
+        ElectricalEquipmentCollection.getElectricalEquipmentCollection().getCollection()) {
+            CircuitBreaker.getCircuitBreakerScheme(eachElectricalEquipment.getPower(),
+                    eachElectricalEquipment.getOperatingCurrent(), eachElectricalEquipment.getName(),
+                    eachElectricalEquipment.getVoltage(), eachElectricalEquipment.getCircuitBreaker(),
+                    eachElectricalEquipment.getCable());
+        }
+
+        //Calling File Chooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save scheme");
+        fileChooser.setInitialFileName("Scheme");
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+//        fileChooser.setInitialDirectory();
+        //getting stage
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        alternative way of setting stage for fileChooser:
+//        Window stage = getSchemeButton.getScene().getWindow();
+        //open save file window
+        File file = fileChooser.showSaveDialog(window);
+
         //Making snapshot in png
         try {
             SnapshotParameters snapshotParameters = new SnapshotParameters();
             Image snapshot = SchemePage.getSchemePage().getRootPane().snapshot(snapshotParameters, null);
-            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", new File("scheme.png"));
+            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", file);
         } catch (Exception e) {
             System.out.println("Failed to save image: " + e);
             e.printStackTrace();

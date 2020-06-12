@@ -55,7 +55,6 @@ public class SchemePage {
         if(schemePage == null) {
             schemePage = new SchemePage();
         }
-        System.out.println("Take your scheme!");
         return schemePage;
     }
     /** Setting width to Pane. By default = WIDTH_A3 */
