@@ -24,7 +24,7 @@ public class ElectricalEquipment {
         this.power = power;
         this.operatingCurrent = operatingCurrent;
         this.circuitBreaker = CircuitBreakerStore.getCircuitBreaker(type, operatingCurrent);
-        this.cable = CableStore.getCable(type, operatingCurrent);
+        this.cable = CableStore.getCable(voltage, operatingCurrent);
     }
 
     /** Second constructor when power missed */
@@ -36,7 +36,7 @@ public class ElectricalEquipment {
         this.operatingCurrent = operatingCurrent;
         this.power = Electrical.getPower(type, voltage, operatingCurrent);
         this.circuitBreaker = CircuitBreakerStore.getCircuitBreaker(type, operatingCurrent);
-        this.cable = CableStore.getCable(type, operatingCurrent);
+        this.cable = CableStore.getCable(voltage, operatingCurrent);
     }
 
     /** Third constructor when operating Current missed */
@@ -47,7 +47,7 @@ public class ElectricalEquipment {
         this.power = power;
         this.operatingCurrent = Electrical.getCurrent(type, voltage, power);
         this.circuitBreaker = CircuitBreakerStore.getCircuitBreaker(type, operatingCurrent);
-        this.cable = CableStore.getCable(type, operatingCurrent);
+        this.cable = CableStore.getCable(voltage, operatingCurrent);
     }
 
     public String getName() {
