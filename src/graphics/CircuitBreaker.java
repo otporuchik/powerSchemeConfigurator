@@ -19,7 +19,7 @@ public class CircuitBreaker {
 
     public static void getCircuitBreakerScheme(double power, double current,
                                                String name, int voltage, String circuitBreaker, String cable) {
-//1 phase circuit breaker module
+//1 line circuit breaker module
         //here it starts
         Circle circleL = new Circle();
         circleL.setCenterX(mmToPixels(70 + moveCounter));

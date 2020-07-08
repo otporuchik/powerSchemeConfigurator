@@ -7,10 +7,15 @@ import static constants.Electrical.*;
  */
 public class CircuitBreakerStore {
     /**
+     * Variable to count total current load of created by configurator station.
+     */
+    public static double totalCurrent;
+
+    /**
      * Choosing standard circuit breaker value.
      * Restriction - max value of operating current should be less than 100A.
      */
-    public static double getCircuitBreakerValue(double operatingCurrent) {
+    private static int getCircuitBreakerValue(double operatingCurrent) {
         for(int i = 0; i < STANDARD_CIRCUIT_BREAKERS_ARRAY.length; i++) {
             //COEFFICIENT_OF_DEVIATION here is to choose circuit breaker not too close to operating current
             if ((STANDARD_CIRCUIT_BREAKERS_ARRAY[i] >= operatingCurrent * COEFFICIENT_OF_DEVIATION)) {
@@ -48,15 +53,24 @@ public class CircuitBreakerStore {
             case PUMP:
             case VENTILATOR:
             case ANY_OTHER_INDUCTIVE_LOAD:
+                totalCurrent+= operatingCurrent;
                 return getMotorProtector(operatingCurrent);
 
             case HEATER:
             case LIGHT:
             case SOCKET:
             case ANY_OTHER_RESISTIVE_LOAD:
+                totalCurrent+= operatingCurrent;
                 return "\nS201C\n" + getCircuitBreakerValue(operatingCurrent);
         }
         return "Check getCircuit\nBreaker method!";
+    }
+
+    /**
+     * Getting main circuit breaker for total current load of station (sum of all operating currents).
+     */
+    public static String getMainCircuitBreaker() {
+        return "\nS203\n" + "D" + getCircuitBreakerValue(totalCurrent);
     }
 
 }

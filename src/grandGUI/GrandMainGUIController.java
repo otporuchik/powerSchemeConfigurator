@@ -21,6 +21,10 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.io.File;
 
+import static electroPackage.CircuitBreakerStore.getMainCircuitBreaker;
+import static electroPackage.CircuitBreakerStore.totalCurrent;
+import static graphics.MainCircuitBreaker.getMainCircuitBreakerScheme;
+
 /**Controller of main configuration page.
  *
  * @version             1.0 02 Feb 2020
@@ -153,6 +157,9 @@ public class GrandMainGUIController {
                     eachElectricalEquipment.getCable());
         }
 
+        //Getting main circuit breaker on scheme
+        getMainCircuitBreakerScheme();
+
         //Calling File Chooser
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save scheme");
@@ -176,6 +183,9 @@ public class GrandMainGUIController {
             System.out.println("Failed to save image: " + e);
             e.printStackTrace();
         }
+
+        System.out.println("Total current = " + totalCurrent + "\n" +
+                            "Main circuit breaker is: " + getMainCircuitBreaker());
 
     }
 }
