@@ -7,25 +7,17 @@ import static constants.Electrical.*;
  */
 public class CircuitBreakerStore {
     /**
-     * Choosing circuit breaker for heaters and etc.
+     * Choosing standard circuit breaker value.
      * Restriction - max value of operating current should be less than 100A.
      */
-    private static String getCircuitBreaker(double operatingCurrent) {
-        String circuitBreakerValue = "0.0"; //IDE worrying if it stays uninitialized (it won't), so, here it is: magic number 0.0.
-
-        thisLoop: for(int i = 0; i < STANDARD_CIRCUIT_BREAKERS_ARRAY.length; i++) {
+    public static double getCircuitBreakerValue(double operatingCurrent) {
+        for(int i = 0; i < STANDARD_CIRCUIT_BREAKERS_ARRAY.length; i++) {
             //COEFFICIENT_OF_DEVIATION here is to choose circuit breaker not too close to operating current
             if ((STANDARD_CIRCUIT_BREAKERS_ARRAY[i] >= operatingCurrent * COEFFICIENT_OF_DEVIATION)) {
-                circuitBreakerValue = "\nC" + String.valueOf(STANDARD_CIRCUIT_BREAKERS_ARRAY[i]);
-                break thisLoop;
+                return STANDARD_CIRCUIT_BREAKERS_ARRAY[i];
             }
-            /*
-            else if (operatingCurrent > STANDART_CIRCUIT_BREAKERS_ARRAY[STANDART_CIRCUIT_BREAKERS_ARRAY.length - 1]) {
-                circuitBreakerValue = "0.0"; //This value is not best idea, but it won't get appropriate result and makes operator to think.
-            }
-             */
         }
-        return circuitBreakerValue;
+        return 0;
     }
 
     /**
@@ -34,15 +26,20 @@ public class CircuitBreakerStore {
      * Restriction - max value of operating current should be less or equal 32A.
      */
     private static String getMotorProtector(double operatingCurrent) {
-        String motorProtectorValue = "0.0"; //IDE worrying if it stays uninitialized (it won't), so, here it is: magic number 0.0.
+        String motorProtector = "";
 
         for(int i = 0; i < STANDARD_MOTOR_PROTECTORS_ARRAY.length; i++) {
-            if(operatingCurrent >= STANDARD_MOTOR_PROTECTORS_ARRAY[i][0] &&
-                    operatingCurrent <= STANDARD_MOTOR_PROTECTORS_ARRAY[i][1]) {
-                motorProtectorValue = "\nMS116\n" + STANDARD_MOTOR_PROTECTORS_ARRAY[i][1];
+            if(operatingCurrent <= 32) { //max current of motor-protector MS116 is 32A.
+                if(operatingCurrent >= STANDARD_MOTOR_PROTECTORS_ARRAY[i][0] &&
+                        operatingCurrent <= STANDARD_MOTOR_PROTECTORS_ARRAY[i][1]) {
+                    motorProtector = "\nMS116\n" + STANDARD_MOTOR_PROTECTORS_ARRAY[i][1];
+                }
+            } else {
+                motorProtector = "\nS203D\n" + getCircuitBreakerValue(operatingCurrent);
             }
+
         }
-        return motorProtectorValue;
+        return motorProtector;
     }
 
     /** Getting circuit breaker or motor protector depending on type of electrical equipment. */
@@ -57,7 +54,7 @@ public class CircuitBreakerStore {
             case LIGHT:
             case SOCKET:
             case ANY_OTHER_RESISTIVE_LOAD:
-                return getCircuitBreaker(operatingCurrent);
+                return "\nS201C\n" + getCircuitBreakerValue(operatingCurrent);
         }
         return "Check getCircuit\nBreaker method!";
     }

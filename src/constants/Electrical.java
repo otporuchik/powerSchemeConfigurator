@@ -36,8 +36,8 @@ public class Electrical {
     public static int[] STANDARD_CIRCUIT_BREAKERS_ARRAY = { 1, 3, 6, 10, 16, 20, 25, 32, 40, 50, 63, 80, 100 };
 
     /**
-     * 2-dimensional array of typical motor protectors values, based on ABB MS-116 type
-     * First dimension include array with 2 values. First = min value of motor protector current,
+     * Multi dimensional array of typical motor protectors values, based on ABB MS-116 type
+     * Each array is an array with 2 values. First = min value of motor protector current,
      * second = max value.
      */
     public static double[][] STANDARD_MOTOR_PROTECTORS_ARRAY = { {0.10, 0.16}, {0.16, 0.25}, {0.25, 0.40}, {0.40, 0.63},
@@ -46,6 +46,14 @@ public class Electrical {
     /*
     https://library.e.abb.com/public/7f9b6ba20107808885257d50004b552c/AC1010_2013.pdf
      */
+
+    /**
+     * Array to search cable cross section area for cable with four wires (PUE).
+     * First value = current, second value = cable cross section area.
+     */
+    public static double[][] CABLE_AREA = {{16, 1.5}, {25, 2.5}, {30, 4.0}, {40, 6.0}, {50, 10.0}, {75, 16.0},
+            {90, 25.0}, {115, 35}, {150, 50}, {185, 70}, {225, 95}, {260, 120}};
+
 
     //methods to work with constants
 //useful link: https://elektroshkola.ru/kalkulyatory/onlajn-raschet-xarakteristik-trexfaznyx-elektrodvigatelej/
